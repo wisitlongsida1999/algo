@@ -1,38 +1,20 @@
 class Solution(object):
-    def wordSubsets(self, words1, words2):
-        """
-        :type words1: List[str]
-        :type words2: List[str]
-        :rtype: List[str]
-        """
-        
-        temp = []
+    def wordSubsets(self, A, B):
+        def count(word):
+            ans = [0] * 26
+            for letter in word:
+                ans[ord(letter) - ord('a')] += 1
+            return ans
 
-        for i in words1:
-            
-            found_word = True
-            
-            for j in words2:
-                
-                temp_i = i
-                
-                for k in j:
-                    
-                    if k not in temp_i:
-                        
-                        found_word = False
-                        
-                        break
-                    
-                    temp_i = temp_i.replace(k,'',1)
-                    
-                if not found_word:
-                    
-                    break
-            
-            if found_word:
-                temp.append(i)
-                
-        return temp
+        bmax = [0] * 26
+        for b in B:
+            for i, c in enumerate(count(b)):
+                bmax[i] = max(bmax[i], c)
+
+        ans = []
+        for a in A:
+            if all(x >= y for x, y in zip(count(a), bmax)):
+                ans.append(a)
+        return ans
         
         
