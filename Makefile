@@ -8,4 +8,4 @@ createDir:
 	@mkdir $(dirName)
 
 CreateFiles:
-	@touch $(dirName)/main.py $(dirName)/README.md $(dirName)/tst.py
+	@touch $(dirName)/main.py $(dirName)/README.md $(dirName)/tst.py @touch $(dirName)/main.cpp
